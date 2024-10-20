@@ -87,6 +87,8 @@ public class LoginActivity extends AppCompatActivity {
     public void checkUser(){
         String userUsername = Login_name.getText().toString().trim();
         String userUserpassword = Login_password.getText().toString().trim();
+        String username = Login_name.getText().toString();
+        String password = Login_password.getText().toString();
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User");
         Query checkUserDatabase = reference.orderByChild("username").equalTo(userUsername);
@@ -100,6 +102,8 @@ public class LoginActivity extends AppCompatActivity {
                     if (passwordFromDB.equals(userUserpassword)){
                         Login_name.setError(null);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.putExtra("username", username);
+                        intent.putExtra("password", password);
                         startActivity(intent);
                     }else{
                         Login_password.setError("Invalid");
