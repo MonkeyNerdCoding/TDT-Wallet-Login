@@ -46,9 +46,9 @@ public class activity_account extends AppCompatActivity {
         EditPassword = findViewById(R.id.editPassword);
         EditPhoneNumber = findViewById(R.id.editPhoneNumber);
         TextView3 = findViewById(R.id.textView3);
-        EditUsername.setText(username);
-        EditPassword.setText(password);
-        TextView3.setText(username);
+//        EditUsername.setText(username);
+//        EditPassword.setText(password);
+//        TextView3.setText(username);
         BtnSignOut = findViewById(R.id.btnSignOut);
         mAuth = FirebaseAuth.getInstance();
 
@@ -61,7 +61,12 @@ public class activity_account extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     String phoneNumber = snapshot.child("phonenumber").getValue(String.class);
+                    String username = snapshot.child("username").getValue(String.class);
+                    String password = snapshot.child("password").getValue(String.class);
+
                     EditPhoneNumber.setText(phoneNumber);
+                    EditUsername.setText(username);
+                    EditPassword.setText(password);
                 } else {
                     EditPhoneNumber.setText("Phone number not found");
                 }
